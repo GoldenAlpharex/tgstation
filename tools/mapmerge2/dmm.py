@@ -10,6 +10,7 @@ ENCODING = 'utf-8'
 
 Coordinate = namedtuple('Coordinate', ['x', 'y', 'z'])
 
+
 class DMM:
     __slots__ = ['key_length', 'size', 'dictionary', 'grid', 'header']
 
@@ -23,11 +24,11 @@ class DMM:
     @staticmethod
     def from_file(fname):
         with open(fname, 'r', encoding=ENCODING) as f:
-            return _parse(f.read())
+            return _parse(f.read(), DMM)
 
     @staticmethod
     def from_bytes(bytes):
-        return _parse(bytes.decode(ENCODING))
+        return _parse(bytes.decode(ENCODING), DMM)
 
     def to_file(self, fname, *, tgm = True):
         self._presave_checks()
@@ -135,6 +136,7 @@ class DMM:
 
     def __repr__(self):
         return f"DMM(size={self.size}, key_length={self.key_length}, dictionary_size={len(self.dictionary)})"
+
 
 # ----------
 # key handling
@@ -334,7 +336,7 @@ def save_dmm(dmm, output):
 # ----------
 # Parser
 
-def _parse(map_raw_text):
+def _parse(map_raw_text, constructor):
     in_comment_line = False
     comment_trigger = False
 
@@ -565,7 +567,7 @@ def _parse(map_raw_text):
     for (x, y, z), tile in grid.items():
         grid2[x, maxy + 1 - y, z] = tile
 
-    data = DMM(key_length, Coordinate(maxx, maxy, maxz))
+    data = constructor(key_length, Coordinate(maxx, maxy, maxz))
     data.dictionary = dictionary
     data.grid = grid2
     return data
