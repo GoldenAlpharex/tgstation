@@ -7881,7 +7881,6 @@
 	},
 /obj/machinery/newscaster/directional/east,
 /obj/effect/landmark/start/lawyer,
-/obj/machinery/light/directional/south,
 /turf/open/floor/wood,
 /area/service/lawoffice)
 "byD" = (
@@ -37093,6 +37092,7 @@
 	name = "Ordnance Lab Maintenance";
 	req_one_access_txt = "47"
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/science/storage)
 "lSr" = (
