@@ -101,7 +101,7 @@
 	use_power = IDLE_POWER_USE
 	anchored = TRUE
 	density = TRUE
-	obj_flags = NO_BUILD // Becomes undense when the door is open
+	obj_flags = BLOCKS_CONSTRUCTION // Becomes undense when the door is open
 	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.5
 	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 0.3
 
@@ -173,7 +173,7 @@
 	mod_unit = null
 	open_machine()
 
-/obj/machinery/mod_installer/open_machine(density_to_set = FALSE)
+/obj/machinery/mod_installer/open_machine(drop = TRUE, density_to_set = FALSE)
 	if(state_open)
 		return FALSE
 	..()

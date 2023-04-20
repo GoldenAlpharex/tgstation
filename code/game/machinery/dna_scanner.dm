@@ -5,7 +5,7 @@
 	icon_state = "scanner"
 	base_icon_state = "scanner"
 	density = TRUE
-	obj_flags = NO_BUILD // Becomes undense when the door is open
+	obj_flags = BLOCKS_CONSTRUCTION // Becomes undense when the door is open
 	occupant_typecache = list(/mob/living, /obj/item/bodypart/head, /obj/item/organ/internal/brain)
 	circuit = /obj/item/circuitboard/machine/dnascanner
 	var/locked = FALSE
@@ -104,7 +104,7 @@
 
 	return TRUE
 
-/obj/machinery/dna_scannernew/open_machine(density_to_set = FALSE)
+/obj/machinery/dna_scannernew/open_machine(drop = TRUE, density_to_set = FALSE)
 	if(state_open)
 		return FALSE
 
