@@ -21,6 +21,7 @@
 /code/controllers/globals.dm @Cyberboss
 /code/datums/helper_datums/getrev.dm @Cyberboss
 /code/modules/tgs/ @Cyberboss
+/code/ze_genesis_call/ @Cyberboss
 /tools/tgs_test/ @Cyberboss
 
 
@@ -57,6 +58,7 @@
 /code/modules/client/preferences/ @Mothblocks
 /code/modules/client/preferences_menu.dm @Mothblocks
 /tgui/packages/tgui/interfaces/PreferencesMenu/ @Mothblocks
+/tools/ezdb/ @Mothblocks
 /tools/maplint/source/ @Mothblocks
 /tools/pull_request_hooks/ @Mothblocks
 /tools/screenshot-test-comparison/ @Mothblocks
