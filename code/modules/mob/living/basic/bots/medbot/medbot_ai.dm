@@ -6,7 +6,7 @@
 		/datum/ai_planning_subtree/handle_medbot_speech,
 		/datum/ai_planning_subtree/find_and_hunt_target/patients_in_crit,
 		/datum/ai_planning_subtree/treat_wounded_target,
-		/datum/ai_planning_subtree/salute_beepsky,
+		/datum/ai_planning_subtree/salute_authority,
 		/datum/ai_planning_subtree/find_patrol_beacon,
 	)
 	ai_movement = /datum/ai_movement/jps/bot/medbot
@@ -69,7 +69,7 @@
 
 /datum/ai_behavior/find_suitable_patient/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	. = ..()
-	if(!succeeded || get_dist(controller.pawn, controller.blackboard[target_key]) <= 1)
+	if(!succeeded || QDELETED(controller.pawn) ||get_dist(controller.pawn, controller.blackboard[target_key]) <= 1)
 		return
 	var/datum/action/cooldown/bot_announcement/announcement = controller.blackboard[BB_ANNOUNCE_ABILITY]
 	announcement?.announce(pick(controller.blackboard[BB_WAIT_SPEECH]))
@@ -192,15 +192,15 @@
 	. = ..()
 	var/mob/living/living_target = controller.blackboard[target_key]
 	if(QDELETED(living_target))
-		finish_action(controller, FALSE)
+		finish_action(controller, FALSE, target_key)
 		return
 	var/datum/action/cooldown/bot_announcement/announcement = controller.blackboard[BB_ANNOUNCE_ABILITY]
 	if(QDELETED(announcement))
-		finish_action(controller, FALSE)
+		finish_action(controller, FALSE, target_key)
 		return
 	var/text_to_announce = "Medical emergency! [living_target] is in critical condition at [get_area(living_target)]!"
 	announcement.announce(text_to_announce, controller.blackboard[BB_RADIO_CHANNEL])
-	finish_action(controller, TRUE)
+	finish_action(controller, TRUE, target_key)
 
 /datum/ai_behavior/announce_patient/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	. = ..()
